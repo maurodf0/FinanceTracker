@@ -12,6 +12,9 @@
             <USkeleton class="h-6 w-full" v-if="loading" />
             <div v-else class="flex space-x-1 items-center text-sm">
               <UIcon name="i-heroicons-arrow-trending-up" class="w-6 h-6" :class="[color]" />
+              <div class="text-gray-500 dark:text-gray-400">
+                30% vs last period
+              </div>
             </div>
         </div>
 
