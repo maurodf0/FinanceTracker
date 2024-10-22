@@ -5,6 +5,13 @@
             <USelectMenu v-model="viewSelected" :options="transactionViewOptions" />
         </div>
     </section>
+
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 sm:gap-16 mb-10">
+        <AppTrend color="green" title="Income" :amount="4000" :last-amount="3000" :loading="false" />
+        <AppTrend color="green" title="Income" :amount="4000" :last-amount="3000" :loading="false" />
+        <AppTrend color="red" title="Income" :amount="4000" :last-amount="3000" :loading="false" />
+        <AppTrend color="green" title="Income" :amount="4000" :last-amount="3000" :loading="false" />
+    </section>
 </template>
 
 
