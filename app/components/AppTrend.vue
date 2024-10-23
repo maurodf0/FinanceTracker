@@ -13,7 +13,7 @@
             <div v-else class="flex space-x-1 items-center text-sm">
               <UIcon :name="icon" class="w-6 h-6" :class="{'green': trendingUp, 'red': !trendingUp}" />
               <div class="text-gray-500 dark:text-gray-400">
-                30% vs last period
+                {{percentageTrend}} vs last period
               </div>
             </div>
         </div>
@@ -36,6 +36,16 @@
 
     const icon = computed( () => {
         return trendingUp.value ? 'i-heroicons-arrow-trending-up' : 'i-heroicons-arrow-trending-down';
+    })
+
+    const percentageTrend = computed( () => {
+        if(props.amout === 0 || props.lastAmount === 0) return '0%'
+        const bigger = Math.max(props.amount, props.lastAmount)
+        const lower = Math.min(props.amount, props.lastAmount)
+
+        const ratio = ((bigger - lower) / lower) * 100;
+
+        return `${Math.ceil(ratio)}%`
     })
 
 </script>
