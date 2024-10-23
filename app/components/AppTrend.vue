@@ -11,7 +11,7 @@
         <div>
             <USkeleton class="h-6 w-full" v-if="loading" />
             <div v-else class="flex space-x-1 items-center text-sm">
-              <UIcon name="i-heroicons-arrow-trending-up" class="w-6 h-6" :class="[color]" />
+              <UIcon :name="icon" class="w-6 h-6" :class="{'green': trendingUp, 'red': !trendingUp}" />
               <div class="text-gray-500 dark:text-gray-400">
                 30% vs last period
               </div>
@@ -22,12 +22,20 @@
 </template>
 
 <script setup>
-    defineProps({
+ const props = defineProps({
         title: String,
         amount: Number,
         lastAmount: Number,
         color: String,
         loading: Boolean
+    })
+
+    const trendingUp = computed( () =>{
+        return props.amount >= props.lastAmount
+    })  
+
+    const icon = computed( () => {
+        return trendingUp.value ? 'i-heroicons-arrow-trending-up' : 'i-heroicons-arrow-trending-down';
     })
 
 </script>
