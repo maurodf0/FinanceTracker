@@ -13,10 +13,12 @@
         <AppTrend color="green" title="Saving" :amount="4000" :last-amount="1000" :loading="false" />
     </section>
 
-    <FinanceTransaction />
-    <FinanceTransaction />
-    <FinanceTransaction />
-    <FinanceTransaction />
+    <section>
+        <FinanceTransaction />
+        <FinanceTransaction />
+        <FinanceTransaction />
+        <FinanceTransaction />
+    </section>
 </template>
 
 
