@@ -1,12 +1,11 @@
 export const useCurrency = (amount) => {
-    const currency = current ( () => {
-        return new Intl.NumberFormat(locales: 'it-IT', {
-            style: 'currency',
-            currency: 'EUR'
-        }).format(isRef(amout) ? amount.value : amount)
-    }) 
-
+    const currency = computed(() => {
+      return new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'EUR'
+      }).format(isRef(amount) ? amount.value : amount)
+    })
     return {
-        currency
+      currency
     }
-}
+  }
