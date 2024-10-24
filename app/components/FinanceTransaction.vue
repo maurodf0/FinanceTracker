@@ -3,10 +3,10 @@
         <div class="flex items-center justify-between">
         <div class="flex items-center space-x-1">
             <UIcon name="i-heroicons-arrow-up-right" class="text-green-600"/>
-            <h6>Salary</h6>
+            <h6>{{ transaction.description }}</h6>
          </div>
          <div>
-            <UBadge color="white">Category</UBadge>
+            <UBadge color="white" v-if="transaction.category">{{ transaction.category }}</UBadge>
         </div>
         </div>
 
@@ -23,7 +23,11 @@
 
 <script setup>
 
-const { currency } = useCurrency(5000);
+const props = defineProps({
+    transaction: Object
+})
+
+const { currency } = useCurrency(props.transaction.amount);
 const items = [
 [    {
         label: 'Edit',

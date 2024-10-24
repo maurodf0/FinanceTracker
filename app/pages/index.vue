@@ -14,10 +14,10 @@
     </section>
 
     <section>
-        <FinanceTransaction />
-        <FinanceTransaction />
-        <FinanceTransaction />
-        <FinanceTransaction />
+        <FinanceTransaction 
+            v-for="transaction in transactions" 
+            :key="transaction.id"
+            :transaction="transaction" />
     </section>
 </template>
 
@@ -27,4 +27,14 @@ import { transactionViewOptions } from '../constants.js';
 
 const viewSelected = ref(transactionViewOptions[1]);
 
+const supabase = useSupabaseClient();
+
+const transactions = ref([]);
+
+//without useAsyncData this works on client and server, so twice
+const {data, error} = await supabase
+    .from('transactions')
+    .select()
+
+transactions.value = data;
 </script>
