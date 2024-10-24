@@ -32,9 +32,15 @@ const supabase = useSupabaseClient();
 const transactions = ref([]);
 
 //without useAsyncData this works on client and server, so twice
-const {data, error} = await supabase
+const { data, pending } = await useAsyncData( 'transactions', async () => {
+    const {data, error} = await supabase
     .from('transactions')
     .select()
 
-transactions.value = data;
+    if (error ) return [];
+
+    return data;
+} )
+
+transactions.value = data.value
 </script>
