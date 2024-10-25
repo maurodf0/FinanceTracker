@@ -2,7 +2,7 @@
     <div class="grid grid-cols-2 py-4 border-b border-gray-200 dark:border-gray-800 text-gray-900 dark:text-gray-100">
         <div class="flex items-center justify-between">
         <div class="flex items-center space-x-1">
-            <UIcon :name="icon" class="text-green-600"/>
+            <UIcon :name="icon" :class="iconColor"/>
             <h6>{{ transaction.description }}</h6>
          </div>
          <div>
@@ -26,6 +26,10 @@
 const props = defineProps({
     transaction: Object
 });
+
+const iconColor = computed( () => {
+    return props.transaction.type === 'Income' ? 'text-green-600' : 'text-red-600';
+})
 
 const icon = computed(() => {
     return props.transaction.type === 'Income' ? 'i-heroicons-arrow-up-right' : 'i-heroicons-arrow-down-left';
