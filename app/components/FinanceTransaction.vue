@@ -27,12 +27,16 @@ const props = defineProps({
     transaction: Object
 });
 
+const isIncome = computed( () => {
+     return props.transaction.type === 'Income';
+} )
+
 const iconColor = computed( () => {
-    return props.transaction.type === 'Income' ? 'text-green-600' : 'text-red-600';
+    return isIncome.value ? 'text-green-600' : 'text-red-600';
 })
 
 const icon = computed(() => {
-    return props.transaction.type === 'Income' ? 'i-heroicons-arrow-up-right' : 'i-heroicons-arrow-down-left';
+    return isIncome.value  ? 'i-heroicons-arrow-up-right' : 'i-heroicons-arrow-down-left';
 });
 
 const { currency } = useCurrency(props.transaction.amount);
