@@ -38,12 +38,21 @@
 import { transactionViewOptions } from '../constants.js';
 
 const viewSelected = ref(transactionViewOptions[1]);
-
 const supabase = useSupabaseClient();
-
 const transactions = ref([]);
-
 const isLoading = ref(false);
+
+const income = computed( () => {
+    return transactions.value.filter( t => {
+        t.type === 'Income'
+    })
+})
+
+const expense = computed( () => {
+    return transactions.value.filter( t => {
+        t.type === 'Expense';
+    })
+} )
 
 const fetchTransactions = async () => {
     isLoading.value = true;
