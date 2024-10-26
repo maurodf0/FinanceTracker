@@ -25,14 +25,12 @@
             <UModal v-model="isOpen">
                 <UCard>
                     <template #header>
-                    <Placeholder class="h-8" />
+                    Add Transiction
                     </template>
 
-                    <Placeholder class="h-32" />
+                    Yo
 
-                    <template #footer>
-                    <Placeholder class="h-8" />
-                    </template>
+            
                 </UCard>
       </UModal>
         </div>
