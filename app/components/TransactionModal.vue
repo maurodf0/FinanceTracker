@@ -1,5 +1,4 @@
 <template>
-       <UButton v-model="isOpen = true" icon="i-heroicons-plus-circle" color="white" variant="solid" label="Add" />
             <UModal v-model="isOpen">
                 <UCard>
                     <template #header>
@@ -14,13 +13,13 @@
 </template>
 
 <script setup lang="ts">
-    defineProps({
+   const props = defineProps({
         modelValue: Boolean
     })
    const emit = defineEmits(['update:modelValue'])
 
-   const isOpen = computed(
+   const isOpen = computed({
     get: () => props.modelValue,
     set: (value) => emit('update:modelValue', value)
-   )
+   })
 </script>

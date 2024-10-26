@@ -21,7 +21,8 @@
             </div>
         </div>
         <div>
-         <TransactionModal isOpen="isOpen"/>
+         <TransactionModal v-model="isOpen"/>
+         <UButton icon="i-heroicons-plus-circle" color="white" variant="solid" label="Add" @click="isOpen = true" />
         </div>
     </section>
 
