@@ -13,6 +13,18 @@
         <AppTrend color="green" title="Saving" :amount="4000" :last-amount="1000" :loading="isLoading" />
     </section>
 
+    <section class="flex justify-between mb-10 items-center">
+        <div>
+            <h2 class="text-2xl font-extrabold">Transactions</h2>
+            <div class="text-gray-500 dark:text-gray-400">
+                You have {{  incomeCount  }} income and {{ expenseCount }} expense in this period
+            </div>
+        </div>
+        <div>
+            <UButton icon="i-heroicons-plus-circle" color="white" variant="solid" label="Add" />
+        </div>
+    </section>
+
     <section v-if="!isLoading">
         <div 
             v-for="(transactionsOnDay, date) in transactionsGroupedByDate" 
