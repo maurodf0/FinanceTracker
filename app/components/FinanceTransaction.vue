@@ -41,32 +41,25 @@ const icon = computed(() => {
 
 const { currency } = useCurrency(props.transaction.amount);
 
-const isLoading = ref();
-const toast = useToast();
-const supabase = useSupabaseClient();
-
+const isLoading = ref(false)
+const toast = useToast()
+const supabase = useSupabaseClient()
 const deleteTransaction = async () => {
-    isLoading.value = true;
-
-    try {
-        await supabase.from('transactions').delete().eq('id', props.transaction.id);
-        toast.add(
-            {
-            title: 'Transaction delete',
-            icon: 'i-heroicons-exclamation-circle',
-            color: 'green'
+  isLoading.value = true
+  try {
+    await supabase.from('transactions').delete().eq('id', props.transaction.id)
+    toast.add({
+      title: 'Transaction deleted',
+      icon: 'i-heroicons-check-circle',
     })
-    } catch (error){
-        toast.add(
-            {
-            title: 'Transaction not deleted',
-            icon: 'i-heroicons-exclamation-circle',
-            color: 'red'
+  } catch (error) {
+    toast.add({
+      title: 'Transaction deleted',
+      icon: 'i-heroicons-exclamation-circle',
     })
-
-    } finally {
-        isLoading.value = false;
-    }
+  } finally {
+    isLoading.value = false
+  }
 }
 const items = [
 [    {
