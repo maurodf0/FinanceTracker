@@ -24,6 +24,7 @@
             :transaction="transaction" />
         </div>
     </section>
+    <UNotifications />
 </template>
 
 
