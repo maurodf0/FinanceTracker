@@ -77,7 +77,7 @@ const items = [
     {
         label: 'Delete',
         icon: 'i-heroicons-trash-20-solid',
-        click: () => deleteTransaction()
+        click: deleteTransaction
     }]
 ];
 
