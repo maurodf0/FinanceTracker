@@ -21,7 +21,20 @@
             </div>
         </div>
         <div>
-            <UButton icon="i-heroicons-plus-circle" color="white" variant="solid" label="Add" />
+            <UButton @click="isOpen = true" icon="i-heroicons-plus-circle" color="white" variant="solid" label="Add" />
+            <UModal v-model="isOpen">
+                <UCard>
+                    <template #header>
+                    <Placeholder class="h-8" />
+                    </template>
+
+                    <Placeholder class="h-32" />
+
+                    <template #footer>
+                    <Placeholder class="h-8" />
+                    </template>
+                </UCard>
+      </UModal>
         </div>
     </section>
 
@@ -53,6 +66,7 @@ const viewSelected = ref(transactionViewOptions[1]);
 const supabase = useSupabaseClient();
 const transactions = ref([]);
 const isLoading = ref(false);
+const isOpen = ref(false);
 
 const income = computed( () => {
     return transactions.value.filter( t => {
