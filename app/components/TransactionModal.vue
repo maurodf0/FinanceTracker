@@ -20,6 +20,24 @@
                             class="mb-4">
                             <UInput type="date" icon="i-heroicons-calendar-days-20-solid"></UInput>
                         </UFormGroup>
+                        <UFormGroup 
+                            label="Transaction Description" 
+                            hint="Optional"
+                            name="description" 
+                            class="mb-4">
+                            <UInput type="text" 
+                                    icon="i-heroicons-calendar-days-20-solid"
+                                    placeholder="Insert Description"></UInput>
+                        </UFormGroup>
+                        <UFormGroup 
+                            label="Transaction Type" 
+                            hint="Optional"
+                            name="description" 
+                            class="mb-4">
+                            <UInput type="text" 
+                                    icon="i-heroicons-calendar-days-20-solid"
+                                    placeholder="Insert Description"></UInput>
+                        </UFormGroup>
                     </div>
 
             
