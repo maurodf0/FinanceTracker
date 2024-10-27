@@ -5,13 +5,14 @@
                     Add Transiction
                     </template>
 
-                    <div>
-                        <UFormGroup 
+                  <UForm :state="state">
+                    <UFormGroup 
                             label="Transaction Type" 
                             :required="true"
                             name="type" 
                             class="mb-4">
                             <USelect 
+                                v-model="state.type"
                                 placeholder="Add Transaction Type"
                                 :options="types" ></USelect>
                         </UFormGroup>
@@ -21,32 +22,43 @@
                             :required="true" 
                             name="amount" 
                             class="mb-4">
-                            <UInput type="number" placeholder="Set di Amount"></UInput>
+                            <UInput 
+                                type="number" 
+                                placeholder="Set di Amount"
+                                v-model.number="state.amount"></UInput>
                         </UFormGroup>
                         <UFormGroup 
                             label="Transaction Date" 
                             :required="true" 
                             name="created_at" 
                             class="mb-4">
-                            <UInput type="date" icon="i-heroicons-calendar-days-20-solid"></UInput>
+                            <UInput 
+                                type="date" 
+                                 v-model="state.created_at"
+                                icon="i-heroicons-calendar-days-20-solid"></UInput>
                         </UFormGroup>
                         <UFormGroup 
                             label="Transaction Description" 
                             hint="Optional"
                             name="description" 
                             class="mb-4">
-                            <UInput type="text" 
-                                    icon="i-heroicons-calendar-days-20-solid"
-                                    placeholder="Insert Description"></UInput>
+                            <UInput
+                                v-model="state.description"
+                                type="text" 
+                                icon="i-heroicons-calendar-days-20-solid"
+                                placeholder="Insert Description"></UInput>
                         </UFormGroup>
                         <UFormGroup 
                             label="Transaction Category" 
                             :required="true" 
                             name="category" 
                             class="mb-4">
-                            <USelect type="select" :options="categories"></USelect> 
-                        </UFormGroup>                
-                    </div>
+                            <USelect 
+                                  v-model="state.category"
+                                type="select" 
+                                :options="categories"></USelect> 
+                        </UFormGroup>    
+                  </UForm>
 
                     <UButton type="submit" color="black" variant="solid" label="Save" />
                 </UCard>
@@ -64,5 +76,14 @@ import { categories, types } from '~~/constants';
    const isOpen = computed({
     get: () => props.modelValue,
     set: (value) => emit('update:modelValue', value)
+   })
+
+
+   const state = ref({
+        type: undefined,
+        amount: 0,
+        created_at: undefined,
+        description: '',
+        category: undefined
    })
 </script>
