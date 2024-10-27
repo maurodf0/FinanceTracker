@@ -6,10 +6,21 @@
                     </template>
 
                     <div>
-                        <UFormGroup label="Amount" :required="true" name="amount" class="">
-
+                        <UFormGroup 
+                            label="Amount" 
+                            :required="true" 
+                            name="amount" 
+                            class="mb-4">
+                            <UInput type="number" placeholder="Set di Amount"></UInput>
                         </UFormGroup>
-                    </div>>
+                        <UFormGroup 
+                            label="Transaction Date" 
+                            :required="true" 
+                            name="created_at" 
+                            class="mb-4">
+                            <UInput type="date" icon="i-heroicons-calendar-days-20-solid"></UInput>
+                        </UFormGroup>
+                    </div>
 
             
                 </UCard>
