@@ -5,7 +5,9 @@
                     Add Transiction
                     </template>
 
-                  <UForm :state="state">
+                  <UForm 
+                    :state="state"
+                    :schema="schema">
                     <UFormGroup 
                             label="Transaction Type" 
                             :required="true"
@@ -67,7 +69,7 @@
 <script setup lang="ts">
 import { categories, types } from '~~/constants';
 import { z } from 'zod'
-import type { FormSubmitEvent } from '#ui/types'
+
 
    const props = defineProps({
         modelValue: Boolean
@@ -79,6 +81,13 @@ import type { FormSubmitEvent } from '#ui/types'
     set: (value) => emit('update:modelValue', value)
    })
 
+   
+const schema = z.object({
+        created_at: z.string,
+        description: z.string().optional(),
+        amount: z.number().positive()
+})
+
 
    const state = ref({
         type: undefined,
@@ -88,11 +97,4 @@ import type { FormSubmitEvent } from '#ui/types'
         category: undefined
    })
 
-
-
-
-const schema = z.object({
-  email: z.string().email('Invalid email'),
-  password: z.string().min(8, 'Must be at least 8 characters')
-})
 </script>
