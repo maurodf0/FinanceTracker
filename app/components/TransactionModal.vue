@@ -5,7 +5,11 @@
                     Add Transiction
                     </template>
 
-                    Yo, modal for add finance tracker
+                    <div>
+                        <UFormGroup label="Amount" :required="true" name="amount" class="">
+
+                        </UFormGroup>
+                    </div>>
 
             
                 </UCard>
