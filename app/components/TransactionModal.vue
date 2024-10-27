@@ -7,6 +7,16 @@
 
                     <div>
                         <UFormGroup 
+                            label="Transaction Type" 
+                            :required="true"
+                            name="type" 
+                            class="mb-4">
+                            <USelect 
+                                placeholder="Add Transaction Type"
+                                :options="types" ></USelect>
+                        </UFormGroup>
+
+                        <UFormGroup 
                             label="Amount" 
                             :required="true" 
                             name="amount" 
@@ -35,25 +45,16 @@
                             name="category" 
                             class="mb-4">
                             <USelect type="select" :options="categories"></USelect> 
-                        </UFormGroup>
-                        <UFormGroup 
-                            label="Transaction Type" 
-                            hint="Optional"
-                            name="description" 
-                            class="mb-4">
-                            <UInput type="text" 
-                                    icon="i-heroicons-calendar-days-20-solid"
-                                    placeholder="Insert Description"></UInput>
-                        </UFormGroup>
+                        </UFormGroup>                
                     </div>
 
-            
+                    <UButton type="submit" color="black" variant="solid" label="Save" />
                 </UCard>
       </UModal>
 </template>
 
 <script setup lang="ts">
-import { categories } from '~~/constants';
+import { categories, types } from '~~/constants';
 
    const props = defineProps({
         modelValue: Boolean
