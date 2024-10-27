@@ -8,7 +8,8 @@
                   <UForm 
                     :state="state"
                     :schema="defaultSchema"
-                    ref="form">
+                    ref="form"
+                    @submit="save">
                     <UFormGroup 
                             label="Transaction Type" 
                             :required="true"
@@ -106,6 +107,10 @@ const expenseSchema = z.object({
 })
 
 const form = ref();
+
+form save = async () => {
+    form.value.validate();
+}
 
 const schema = z.intersection(
     z.discriminatedUnion('type', [incomeSchema, expenseSchema, savingSchema, investmentSchema]),
