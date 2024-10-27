@@ -30,6 +30,13 @@
                                     placeholder="Insert Description"></UInput>
                         </UFormGroup>
                         <UFormGroup 
+                            label="Transaction Category" 
+                            :required="true" 
+                            name="category" 
+                            class="mb-4">
+                            <USelect type="select" :options="categories"></USelect> 
+                        </UFormGroup>
+                        <UFormGroup 
                             label="Transaction Type" 
                             hint="Optional"
                             name="description" 
@@ -46,6 +53,8 @@
 </template>
 
 <script setup lang="ts">
+import { categories } from '~~/constants';
+
    const props = defineProps({
         modelValue: Boolean
     })
