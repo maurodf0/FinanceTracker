@@ -92,7 +92,7 @@ const defaultSchema = z.object({
 })
 
 const incomeSchema = z.object({
-    type: z.literal('Incone')
+    type: z.literal('Income')
 })
 const investmentSchema = z.object({
     type: z.literal('Investment')
@@ -108,7 +108,7 @@ const expenseSchema = z.object({
 
 const form = ref();
 
-form save = async () => {
+const save = async () => {
     form.value.validate();
 }
 
