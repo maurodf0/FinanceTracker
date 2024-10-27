@@ -44,7 +44,6 @@
                             class="mb-4">
                             <UInput
                                 v-model="state.description"
-                                type="text" 
                                 icon="i-heroicons-calendar-days-20-solid"
                                 placeholder="Insert Description"></UInput>
                         </UFormGroup>
@@ -67,6 +66,8 @@
 
 <script setup lang="ts">
 import { categories, types } from '~~/constants';
+import { z } from 'zod'
+import type { FormSubmitEvent } from '#ui/types'
 
    const props = defineProps({
         modelValue: Boolean
@@ -86,4 +87,12 @@ import { categories, types } from '~~/constants';
         description: '',
         category: undefined
    })
+
+
+
+
+const schema = z.object({
+  email: z.string().email('Invalid email'),
+  password: z.string().min(8, 'Must be at least 8 characters')
+})
 </script>
