@@ -5,7 +5,7 @@
                     Add Transiction
                     </template>
 
-                    Yo
+                    Yo, modal for add finance tracker
 
             
                 </UCard>
