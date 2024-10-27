@@ -83,7 +83,7 @@ import { z } from 'zod'
 
    
 const schema = z.object({
-        created_at: z.string,
+        created_at: z.string(),
         description: z.string().optional(),
         amount: z.number().positive()
 })
