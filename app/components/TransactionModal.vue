@@ -64,7 +64,7 @@
                         </UFormGroup>    
                   </UForm>
 
-                    <UButton type="submit" color="black" variant="solid" label="Save" />
+                    <UButton @click="save" type="submit" color="black" variant="solid" label="Save" />
                 </UCard>
       </UModal>
 </template>
@@ -110,6 +110,7 @@ const form = ref();
 
 const save = async () => {
     form.value.validate();
+    console.log('save')
 }
 
 const schema = z.intersection(
