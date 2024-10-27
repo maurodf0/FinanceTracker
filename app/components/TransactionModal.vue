@@ -53,7 +53,8 @@
                             label="Transaction Category" 
                             :required="true" 
                             name="category" 
-                            class="mb-4">
+                            class="mb-4"
+                            v-if="state.type === 'Expense'">
                             <USelect 
                                   v-model="state.category"
                                 type="select" 
@@ -85,7 +86,7 @@ import { z } from 'zod'
 const schema = z.object({
         created_at: z.string(),
         description: z.string().optional(),
-        amount: z.number().positive()
+        amount: z.number().positive('Amount must be more than 0')
 })
 
 
