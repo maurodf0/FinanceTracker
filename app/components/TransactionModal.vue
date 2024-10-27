@@ -7,7 +7,8 @@
 
                   <UForm 
                     :state="state"
-                    :schema="schema">
+                    :schema="defaultSchema"
+                    ref="form">
                     <UFormGroup 
                             label="Transaction Type" 
                             :required="true"
@@ -83,12 +84,33 @@ import { z } from 'zod'
    })
 
    
-const schema = z.object({
+const defaultSchema = z.object({
         created_at: z.string(),
         description: z.string().optional(),
         amount: z.number().positive('Amount must be more than 0')
 })
 
+const incomeSchema = z.object({
+    type: z.literal('Incone')
+})
+const investmentSchema = z.object({
+    type: z.literal('Investment')
+})
+const savingSchema = z.object({
+    type: z.literal('Saving')
+})
+
+const expenseSchema = z.object({
+    type: z.literal('Expense'),
+    category: z.enum(categories)
+})
+
+const form = ref();
+
+const schema = z.intersection(
+    z.discriminatedUnion('type', [incomeSchema, expenseSchema, savingSchema, investmentSchema]),
+    defaultSchema
+)
 
    const state = ref({
         type: undefined,
