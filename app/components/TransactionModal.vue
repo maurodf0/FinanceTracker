@@ -62,7 +62,7 @@
                                 type="select" 
                                 :options="categories"></USelect> 
                         </UFormGroup>    
-                        <UButton type="submit" color="black" variant="solid" label="Save" />
+                        <UButton type="submit" color="black" variant="solid" label="Save" :loading="isLoading" />
                   </UForm>
 
                 </UCard>
@@ -77,7 +77,7 @@ import { z } from 'zod'
    const props = defineProps({
         modelValue: Boolean
     })
-   const emit = defineEmits(['update:modelValue'])
+   const emit = defineEmits(['update:modelValue', 'saved'])
 
    const isOpen = computed({
     get: () => props.modelValue,
@@ -112,10 +112,32 @@ const expenseSchema = z.object({
 })
 
 const form = ref();
+const isLoading = ref();
+
+const supabase = useSupabaseClient();
+const toast = useToast();
 
 const save = async () => {
-
+    //if errors return
     if(form.value.errors.lenght) return ;
+
+    //save into supabase
+    isLoading.value = true;
+
+    try {
+        const { error } = await supabase.from('transactions').upsert({...state.value})
+        if( !error ) {
+            toast.add({
+            'title' : 'Transaction saved',
+            'icon' : 'i-heroicons-check-circle'
+            })
+            isOpen.value = false;
+        }
+    } catch (e){
+
+    } finally {
+        isLoading.value = false;
+    }
     
 }
 
