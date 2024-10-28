@@ -128,12 +128,18 @@ const save = async () => {
         const { error } = await supabase.from('transactions').upsert({...state.value})
         if( !error ) {
             toast.add({
-            'title' : 'Transaction saved',
-            'icon' : 'i-heroicons-check-circle'
+            title: 'Transaction saved',
+            icon: 'i-heroicons-check-circle'
             })
             isOpen.value = false;
+            emit('saved');
         }
     } catch (e){
+        toast.add({
+            title: 'Error: Transaction not saved',
+            description: e.message,
+            icon: 'i-heros-exclamation-circle'
+        })
 
     } finally {
         isLoading.value = false;
