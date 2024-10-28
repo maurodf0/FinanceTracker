@@ -118,12 +118,20 @@ const schema = z.intersection(
     defaultSchema
 )
 
-   const state = ref({
+const initialState = {
         type: undefined,
         amount: 0,
         created_at: undefined,
         description: '',
         category: undefined
+   }
+
+   const state = ref({
+    ...initialState
    })
+
+   const resetForm = () => {
+    return Object.assign(state.value, initialState);
+   }
 
 </script>
