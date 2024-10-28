@@ -110,7 +110,9 @@ return {
         expenseTotal,
         incomeCount,
         expenseCount
-    }
+    },
+    refresh,
+    pending
 }
 
 }
