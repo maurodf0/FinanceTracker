@@ -21,12 +21,12 @@
             </div>
         </div>
         <div>
-            <TransactionModal v-model="isOpen" @saved="refreshTransactions"/>
+            <TransactionModal v-model="isOpen" @saved="refresh"/>
             <UButton icon="i-heroicons-plus-circle" color="white" variant="solid" label="Add" @click="isOpen = true" />
         </div>
     </section>
 
-    <section v-if="!isLoading">
+    <section v-if="!pending">
         <div 
             v-for="(transactionsOnDay, date) in byDate" 
             :key="date">

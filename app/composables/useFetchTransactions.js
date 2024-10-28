@@ -1,4 +1,4 @@
- const useFetchTransactions = () => {
+ export const useFetchTransactions = () => {
     const supabase = useSupabaseClient();
 
     const transactions = ref([]);
@@ -63,7 +63,7 @@ const fetchTransactions = async () => {
 
 // Funzione per aggiornare la lista delle transazioni
 const refresh = async () => {
-    transactions.value = await refresh();
+    transactions.value = await fetchTransactions();
 }
 
 
