@@ -97,4 +97,20 @@ const transactionsGroupedByDate = computed(() => {
 return grouped;
 })
 
+
+return {
+    transactions: {
+        all: transactions,
+        grouped: {
+            byDate: transactionsGroupedByDate
+        },
+        income,
+        expense,
+        incomeTotal,
+        expenseTotal,
+        incomeCount,
+        expenseCount
+    }
+}
+
 }
