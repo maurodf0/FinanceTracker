@@ -9,7 +9,7 @@
                     :state="state"
                     :schema="schema"
                     ref="form"
-                    @submit="save">
+                    @submit.prevent="save">
                     <UFormGroup 
                             label="Transaction Type" 
                             :required="true"
@@ -62,9 +62,9 @@
                                 type="select" 
                                 :options="categories"></USelect> 
                         </UFormGroup>    
+                        <UButton type="submit" color="black" variant="solid" label="Save" />
                   </UForm>
 
-                    <UButton @click="save" type="submit" color="black" variant="solid" label="Save" />
                 </UCard>
       </UModal>
 </template>
@@ -81,7 +81,12 @@ import { z } from 'zod'
 
    const isOpen = computed({
     get: () => props.modelValue,
-    set: (value) => emit('update:modelValue', value)
+    set: (value) => {
+        if(!value){
+            resetForm();
+            emit('update:modelValue', value);
+        }
+    }
    })
 
    
@@ -109,8 +114,10 @@ const expenseSchema = z.object({
 const form = ref();
 
 const save = async () => {
-    form.value.validate();
-    console.log('save')
+    console.log('submit');
+    await form.value.validate();
+    if(form.value.errors.lenght) return ;
+    
 }
 
 const schema = z.intersection(
