@@ -133,7 +133,10 @@ const save = async () => {
             })
             isOpen.value = false;
             emit('saved');
+            return
         }
+
+        throw error;
     } catch (e){
         toast.add({
             title: 'Error: Transaction not saved',
