@@ -17,26 +17,26 @@
         <div>
             <h2 class="text-2xl font-extrabold">Transactions</h2>
             <div class="text-gray-500 dark:text-gray-400">
-                You have {{  incomeCount  }} income and {{ expenseCount }} expense in this period
+                You have {{ incomeCount }} income and {{ expenseCount }} expense in this period
             </div>
         </div>
         <div>
-         <TransactionModal v-model="isOpen"/>
-         <UButton icon="i-heroicons-plus-circle" color="white" variant="solid" label="Add" @click="isOpen = true" />
+            <TransactionModal v-model="isOpen"/>
+            <UButton icon="i-heroicons-plus-circle" color="white" variant="solid" label="Add" @click="isOpen = true" />
         </div>
     </section>
 
     <section v-if="!isLoading">
         <div 
             v-for="(transactionsOnDay, date) in transactionsGroupedByDate" 
-            :key="date" >
+            :key="date">
             <DailyTransaction :date="date" :transactions="transactionsOnDay" />
-        <FinanceTransaction 
-            v-for="transaction in transactionsOnDay" 
-            :key="transaction.id"
-            :transaction="transaction"
-            @deleted="refreshTransactions"
-             />
+            <FinanceTransaction 
+                v-for="transaction in transactionsOnDay" 
+                :key="transaction.id"
+                :transaction="transaction"
+                @deleted="refreshTransactions"
+            />
         </div>
     </section>
 
@@ -48,6 +48,7 @@
 
 
 <script setup lang="ts">
+import { ref, computed } from 'vue';
 import { transactionViewOptions } from '../constants.js';
 
 const viewSelected = ref(transactionViewOptions[1]);
@@ -56,87 +57,96 @@ const transactions = ref([]);
 const isLoading = ref(false);
 const isOpen = ref(false);
 
-const income = computed( () => {
-    return transactions.value.filter( t => {
-        return  t.type === 'Income'
-    })
-})
+// Computed properties per filtrare le transazioni in base al tipo
+const income = computed(() => {
+    return transactions.value.filter(t => {
+        return t.type === 'Income';
+    });
+});
 
-const expense = computed( () => {
-    return transactions.value.filter( t => {
+const expense = computed(() => {
+    return transactions.value.filter(t => {
         return t.type === 'Expense';
-    })
-} )
+    });
+});
 
-const incomeCount = computed( () => {
-    return income.value.length
-})
-const expenseCount = computed( () => {
-    return expense.value.length
-})
+// Computed properties per contare il numero di transazioni
+const incomeCount = computed(() => {
+    return income.value.length;
+});
+const expenseCount = computed(() => {
+    return expense.value.length;
+});
 
+// Computed properties per calcolare il totale delle transazioni
 const incomeTotal = computed(() => {
     return income.value.reduce((sum, transaction) => {
-        return sum + transaction.amount; // Aggiungere il return qui
+        return sum + transaction.amount;
     }, 0);
 });
 const expenseTotal = computed(() => {
     return expense.value.reduce((sum, transaction) => {
-        return sum + transaction.amount; // Aggiungere il return qui
+        return sum + transaction.amount;
     }, 0);
 });
 
+// Funzione per recuperare le transazioni dal database
 const fetchTransactions = async () => {
     isLoading.value = true;
     try {
-    //without useAsyncData this works on client and server, so twice
-    const { data } = await useAsyncData( 'transactions', async () => {
-    const {data, error} = await supabase
-    .from('transactions')
-    .select()
-    .order('created_at', { ascending: false })
+        // Recupera i dati delle transazioni
+        const { data } = await useAsyncData('transactions', async () => {
+            const { data, error } = await supabase
+                .from('transactions')
+                .select()
+                .order('created_at', { ascending: false });
 
-    if (error ) return [];
+            if (error) return [];
 
-        return data
-} )
+            return data;
+        });
 
-    return data.value
+        return data.value;
     } finally {
-       isLoading.value = false;
+        isLoading.value = false;
     }
-
 }
 
-const refreshTransactions = async () => transactions.value = await fetchTransactions();
+// Funzione per aggiornare la lista delle transazioni
+const refreshTransactions = async () => {
+    transactions.value = await fetchTransactions();
+}
 
+// Chiama la funzione per aggiornare le transazioni quando il componente è montato
 await refreshTransactions();
 
-
+// Computed property per raggruppare le transazioni per data
 const transactionsGroupedByDate = computed(() => {
-    let grouped = {}
+    let grouped = {};
 
+    // Raggruppa le transazioni per data
     for (const transaction of transactions.value) {
-      const date = transaction.created_at.split('T')[0]
+        const date = transaction.created_at.split('T')[0];
 
-      if (!grouped[date]) {
-        grouped[date] = []
-      }
+        if (!grouped[date]) {
+            grouped[date] = [];
+        }
 
-      grouped[date].push(transaction)
+        grouped[date].push(transaction);
     }
 
-    //sort in front end
-    // const sortedKeys = Object.keys(grouped).sort().reverse()
-    // const sortedGrouped = {}
+    // Ordina le date in ordine decrescente
+//     const sortedKeys = Object.keys(grouped).sort().reverse();
+    
+// const sortedGrouped = {};
 
-    // for (const key of sortedKeys){
-    //     sortedGrouped[key] = grouped[key]
-    // }
+//     // Crea un nuovo oggetto raggruppato con le date ordinate
+//     for (const key of sortedKeys) {
+//         sortedGrouped[key] = grouped[key];
+//     }
 
-    // return sortedGrouped
+//     return sortedGrouped;});
 
-    return grouped;
-  })
-
+return grouped;
+})
 </script>
