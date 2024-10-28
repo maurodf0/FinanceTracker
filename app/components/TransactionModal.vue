@@ -7,7 +7,7 @@
 
                   <UForm 
                     :state="state"
-                    :schema="defaultSchema"
+                    :schema="schema"
                     ref="form"
                     @submit="save">
                     <UFormGroup 
