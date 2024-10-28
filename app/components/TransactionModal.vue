@@ -141,7 +141,8 @@ const save = async () => {
         toast.add({
             title: 'Error: Transaction not saved',
             description: e.message,
-            icon: 'i-heros-exclamation-circle'
+            icon: 'i-heros-exclamation-circle',
+            color: 'red'
         })
 
     } finally {
