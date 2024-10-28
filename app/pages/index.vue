@@ -7,10 +7,10 @@
     </section>
 
     <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 sm:gap-16 mb-10">
-        <AppTrend color="green" title="Income" :amount="incomeTotal" :last-amount="3000" :loading="isLoading" />
-        <AppTrend color="red" title="Expense" :amount="expenseTotal" :last-amount="7000" :loading="isLoading" />
-        <AppTrend color="red" title="Invesment" :amount="4000" :last-amount="5000" :loading="isLoading" />
-        <AppTrend color="green" title="Saving" :amount="4000" :last-amount="1000" :loading="isLoading" />
+        <AppTrend color="green" title="Income" :amount="incomeTotal" :last-amount="3000" :loading="pending" />
+        <AppTrend color="red" title="Expense" :amount="expenseTotal" :last-amount="7000" :loading="pending" />
+        <AppTrend color="red" title="Invesment" :amount="4000" :last-amount="5000" :loading="pending" />
+        <AppTrend color="green" title="Saving" :amount="4000" :last-amount="1000" :loading="pending" />
     </section>
 
     <section class="flex justify-between mb-10 items-center">
@@ -28,14 +28,14 @@
 
     <section v-if="!isLoading">
         <div 
-            v-for="(transactionsOnDay, date) in transactionsGroupedByDate" 
+            v-for="(transactionsOnDay, date) in byDate" 
             :key="date">
             <DailyTransaction :date="date" :transactions="transactionsOnDay" />
             <FinanceTransaction 
                 v-for="transaction in transactionsOnDay" 
                 :key="transaction.id"
                 :transaction="transaction"
-                @deleted="refreshTransactions"
+                @deleted="refresh"
             />
         </div>
     </section>
@@ -51,16 +51,21 @@
 import { ref, computed } from 'vue';
 import { transactionViewOptions } from '../constants.js';
 
+const { pending, refresh, transactions: {
+    incomeCount,
+    expenseCount,
+    incomeTotal,
+    expenseTotal,
+    grouped: {
+        byDate
+    }
+}} = useFetchTransactions();
 const viewSelected = ref(transactionViewOptions[1]);
-
-
 
 const isOpen = ref(false);
 
-
-
 // Chiama la funzione per aggiornare le transazioni quando il componente è montato
-await refreshTransactions();
+await refresh();
 
 
 </script>
