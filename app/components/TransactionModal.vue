@@ -114,8 +114,7 @@ const expenseSchema = z.object({
 const form = ref();
 
 const save = async () => {
-    console.log('submit');
-    await form.value.validate();
+
     if(form.value.errors.lenght) return ;
     
 }
@@ -139,6 +138,7 @@ const initialState = {
 
    const resetForm = () => {
     return Object.assign(state.value, initialState);
+    form.value.clear();
    }
 
 </script>
