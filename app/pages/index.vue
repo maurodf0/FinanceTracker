@@ -60,9 +60,12 @@ const { pending, refresh, transactions: {
         byDate
     }
 }} = useFetchTransactions();
+
 const viewSelected = ref(transactionViewOptions[1]);
 
 const isOpen = ref(false);
+
+const dates = useSelectedTimePeriod(viewSelected);
 
 // Chiama la funzione per aggiornare le transazioni quando il componente è montato
 await refresh();

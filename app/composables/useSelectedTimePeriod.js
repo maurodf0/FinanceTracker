@@ -1,4 +1,4 @@
-import { endOfMonth, endOfYear, startOfDay, startOfMonth, startOfYear, sub } from "date-fns"
+import { endOfMonth, endOfYear, startOfDay, startOfMonth, startOfYear, sub, endOfDay } from "date-fns"
 
 export const useSelectedTimePeriod = (period) => {
     const dates = computed ( () => {
