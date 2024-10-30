@@ -30,6 +30,11 @@
         loading: Boolean
     })
 
+    //rendiamo amount (che è una props) una ref
+    //in modo che si aggioni ogni volta
+    //Normalmente le props non si aggiornano in autmatico
+    //ma solo in lettura
+    const { amount } = toRefs(props);
     const trendingUp = computed( () =>{
         return props.amount >= props.lastAmount
     })  
@@ -38,7 +43,7 @@
         return trendingUp.value ? 'i-heroicons-arrow-trending-up' : 'i-heroicons-arrow-trending-down';
     })
 
-    const { currency } = useCurrency(props.amount);
+    const { currency } = useCurrency(amount);
 
     const percentageTrend = computed( () => {
         if(props.amout === 0 || props.lastAmount === 0) return '0%'
