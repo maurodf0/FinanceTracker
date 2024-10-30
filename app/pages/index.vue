@@ -65,17 +65,16 @@ const { pending, refresh, transactions: {
         byDate
     }
 }} = useFetchTransactions(current);
+await refresh();
 
-const { transactions: {
+const {refresh: refreshPrevious, transactions: {
     incomeTotal : prevIncomeTotal,
     expenseTotal: prevExpenseTotal,
 }} = useFetchTransactions(previous);
 
 const isOpen = ref(false);
-
-
 // Chiama la funzione per aggiornare le transazioni quando il componente è montato
-await refresh();
+await refreshPrevious();
 
 
 </script>

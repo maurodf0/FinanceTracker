@@ -68,7 +68,7 @@ const refresh = async () => {
     transactions.value = await fetchTransactions();
 }
 
-watch(period, async () => await refresh(), {immediate: true});
+watch(period, async () => await refresh());
 
 // Computed property per raggruppare le transazioni per data
 const transactionsGroupedByDate = computed(() => {
