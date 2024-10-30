@@ -64,7 +64,7 @@ const { pending, refresh, transactions: {
     grouped: {
         byDate
     }
-}} = useFetchTransactions(current.value);
+}} = useFetchTransactions(current);
 
 const isOpen = ref(false);
 
