@@ -7,8 +7,8 @@
     </section>
 
     <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 sm:gap-16 mb-10">
-        <AppTrend color="green" title="Income" :amount="incomeTotal" :last-amount="3000" :loading="pending" />
-        <AppTrend color="red" title="Expense" :amount="expenseTotal" :last-amount="7000" :loading="pending" />
+        <AppTrend color="green" title="Income" :amount="incomeTotal" :last-amount="prevIncomeTotal" :loading="pending" />
+        <AppTrend color="red" title="Expense" :amount="expenseTotal" :last-amount="prevExpenseTotal" :loading="pending" />
         <AppTrend color="red" title="Invesment" :amount="4000" :last-amount="5000" :loading="pending" />
         <AppTrend color="green" title="Saving" :amount="4000" :last-amount="1000" :loading="pending" />
     </section>
@@ -65,6 +65,11 @@ const { pending, refresh, transactions: {
         byDate
     }
 }} = useFetchTransactions(current);
+
+const { transactions: {
+    incomeTotal : prevIncomeTotal,
+    expenseTotal: prevExpenseTotal,
+}} = useFetchTransactions(previous);
 
 const isOpen = ref(false);
 

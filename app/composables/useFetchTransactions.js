@@ -4,8 +4,6 @@
     const transactions = ref([]);
     const pending = ref(false);
 
-    watch(period, async () => await refresh());
-
     // Computed properties per filtrare le transazioni in base al tipo
 const income = computed(() => {
     return transactions.value.filter(t => {
@@ -70,6 +68,7 @@ const refresh = async () => {
     transactions.value = await fetchTransactions();
 }
 
+watch(period, async () => await refresh(), {immediate: true});
 
 // Computed property per raggruppare le transazioni per data
 const transactionsGroupedByDate = computed(() => {
