@@ -51,6 +51,10 @@
 import { ref, computed } from 'vue';
 import { transactionViewOptions } from '../constants.js';
 
+const viewSelected = ref(transactionViewOptions[1]);
+
+const {current, previous } = useSelectedTimePeriod(viewSelected);
+
 const { pending, refresh, transactions: {
     incomeCount,
     expenseCount,
@@ -59,13 +63,10 @@ const { pending, refresh, transactions: {
     grouped: {
         byDate
     }
-}} = useFetchTransactions();
-
-const viewSelected = ref(transactionViewOptions[1]);
+}} = useFetchTransactions(current);
 
 const isOpen = ref(false);
 
-const dates = useSelectedTimePeriod(viewSelected);
 
 // Chiama la funzione per aggiornare le transazioni quando il componente è montato
 await refresh();

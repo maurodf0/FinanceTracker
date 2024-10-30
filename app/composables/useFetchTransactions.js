@@ -1,4 +1,4 @@
- export const useFetchTransactions = () => {
+ export const useFetchTransactions = (period) => {
     const supabase = useSupabaseClient();
 
     const transactions = ref([]);
@@ -43,10 +43,12 @@ const fetchTransactions = async () => {
     pending.value = true;
     try {
         // Recupera i dati delle transazioni
-        const { data } = await useAsyncData('transactions', async () => {
+        const { data } = await useAsyncData(`transactions-${period.value.from.toDateString()}-${period.value.to.toDateString()}`, async () => {
             const { data, error } = await supabase
                 .from('transactions')
                 .select()
+                .gte('created_at', period.value.from.toISOString())
+                .gte('created_at', period.value.to.toISOString())
                 .order('created_at', { ascending: false });
 
             if (error) return [];
