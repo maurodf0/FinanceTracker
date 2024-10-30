@@ -54,6 +54,7 @@ import { transactionViewOptions } from '../constants.js';
 const viewSelected = ref(transactionViewOptions[1]);
 
 const {current, previous } = useSelectedTimePeriod(viewSelected);
+console.log(current);
 
 const { pending, refresh, transactions: {
     incomeCount,
@@ -63,7 +64,7 @@ const { pending, refresh, transactions: {
     grouped: {
         byDate
     }
-}} = useFetchTransactions(current);
+}} = useFetchTransactions(current.value);
 
 const isOpen = ref(false);
 
