@@ -4,6 +4,8 @@
     const transactions = ref([]);
     const pending = ref(false);
 
+    watch(period, async () => await refresh());
+
     // Computed properties per filtrare le transazioni in base al tipo
 const income = computed(() => {
     return transactions.value.filter(t => {
@@ -48,7 +50,7 @@ const fetchTransactions = async () => {
                 .from('transactions')
                 .select()
                 .gte('created_at', period.value.from.toISOString())
-                .gte('created_at', period.value.to.toISOString())
+                .lte('created_at', period.value.to.toISOString())
                 .order('created_at', { ascending: false });
 
             if (error) return [];
