@@ -10,12 +10,12 @@
     </header>
 </template>
 
-<script>
+<script setup>
     const user = useSupabaseUser();
 
     watch(user, (user) => {
        if(user) {
-        alert(' Signed in');
+        console.log(' Signed in');
        }
     }, {immediate: true})
 </script>
