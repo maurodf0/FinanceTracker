@@ -24,6 +24,7 @@
       </div>
     </UCard>
   </div>
+  <UNotifications />
 </template>
 
 <script lang="ts" setup>
