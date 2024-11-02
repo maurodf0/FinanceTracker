@@ -9,3 +9,13 @@
         </div>
     </header>
 </template>
+
+<script>
+    const user = useSupabaseUser();
+
+    watch(user, (user) => {
+       if(user) {
+        alert(' Signed in');
+       }
+    }, {immediate: true})
+</script>
