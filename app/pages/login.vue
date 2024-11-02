@@ -9,7 +9,7 @@
         <UFormGroup label="email" name="email" class="mb-4" :required="true" help="You will recive an email for confirmation link">
           <UInput type="email" placeholder="Email" :required="true" v-model="email" />
         </UFormGroup>
-        <UButton :loading="pending" type="submit" variant="solid" color="black">Sign In</UButton>
+        <UButton :disabled="pending" :loading="pending" type="submit" variant="solid" color="black">Sign In</UButton>
       </form>
 
     </UCard>
