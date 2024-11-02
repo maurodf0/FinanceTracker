@@ -20,7 +20,7 @@
       </template>
       <div class="text-center">
         <p>We have sent an email to <strong>{{email.value}}</strong> with a link for sign in</p>
-        <p><stong>Important:</stong> The link will expire in 10 minutes</p>
+        <p><strong>Important:</strong> The link will expire in 10 minutes</p>
       </div>
     </UCard>
   </div>
@@ -48,12 +48,13 @@
       if(error){
         toast.add({
           title: 'Error Authentication',
-          icon: 'i-heroicons-exclamation-cirlce',
+          icon: 'i-heroicons-exclamation-circle',
           description: error.message,
           color: 'red'
         })
       }  else {
-          success.value
+  
+          success.value = true;
         }
     } finally {
       pending.value = false;
