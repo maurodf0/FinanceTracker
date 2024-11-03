@@ -1,4 +1,4 @@
-export const useRedirectIfAuth = (url) => {
+export const useRedirectIfAuth = (url = '/') => {
 
 const user = useSupabaseUser();
 

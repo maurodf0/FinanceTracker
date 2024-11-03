@@ -34,6 +34,8 @@
   const toast = useToast();
   const supabase = useSupabaseClient();
 
+  useRedirectIfAuth();
+
   const handleLogin = async () => {
     pending.value = true;
 
