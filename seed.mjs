@@ -11,7 +11,7 @@ const supabase = createClient(
 const categories = ['Food', 'Housing', 'Car', 'Entertainment']
 
 const {data: {users}, error} = await supabase.auth.admin.listUsers();
-const usersIds = user.map(user => user.id);
+const usersIds = users.map(user => user.id);
 
 async function seedTransactions() {
   // Delete existing data
