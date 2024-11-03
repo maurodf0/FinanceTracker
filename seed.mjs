@@ -25,7 +25,7 @@ async function seedTransactions() {
 
   let transactions = []
 
-  for (const user of userIds){
+  for (const user of usersIds){
   for (let year = new Date().getFullYear(); year > new Date().getFullYear() - 2; year--) {
     for (let i = 0; i < 50; i++) {
       const date = new Date(
@@ -83,4 +83,4 @@ async function seedTransactions() {
   }
 }
 
-//seedTransactions().catch(console.error)
+seedTransactions().catch(console.error)
