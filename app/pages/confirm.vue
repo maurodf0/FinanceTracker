@@ -1,0 +1,8 @@
+<template>
+    <UCard>
+        <template #header>
+            Signing in....
+        </template>
+        Wait a moment while we signing you in
+    </UCard>
+</template>

@@ -15,7 +15,8 @@
 
     watch(user, (user) => {
        if(user) {
-        console.log(' Signed in');
+        console.log('Signed in');
+        console.log(user);
        }
     }, {immediate: true})
 </script>
