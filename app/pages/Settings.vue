@@ -12,15 +12,15 @@
  const links =[
     {
         label: 'Profile',
-        to: 'settings/profile'
+        to: '/settings/profile'
     },
     {
         label: 'Avatar',
-        to: 'settings/avatar'
+        to: '/settings/avatar'
     },
     {
         label: 'Settings',
-        to: 'settings/settings'
+        to: '/settings/settings'
     },
 ]
 
