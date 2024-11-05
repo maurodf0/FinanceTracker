@@ -31,7 +31,7 @@
   const success = ref(false);
   const email = ref('');
   const pending = ref();
-  const toast = useAppToast();
+  const {toastError, toastSuccess} = useAppToast();
   const supabase = useSupabaseClient();
 
   useRedirectIfAuth();
@@ -48,11 +48,9 @@
       })
 
       if(error){
-        toast.add({
+        toastError({
           title: 'Error Authentication',
-          icon: 'i-heroicons-exclamation-circle',
           description: error.message,
-          color: 'red'
         })
       }  else {
   
