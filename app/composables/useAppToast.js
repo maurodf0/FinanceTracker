@@ -2,11 +2,21 @@ export const useAppToast = () => {
     const toast = useToast();
 
     return {
-        toastSuccess: () => {
-
+        toastSuccess: ({title, description = null}) => {  
+            toast.add({
+                title: title,
+                description: description,
+                icon: 'i-heroicons-check-circle',
+                color: 'green'
+            });
         },
-        toastError: () => {
-            
+        toastError: ({title, description = null}) => {
+            toast.add({
+                title: title,
+                description: description,
+                icon: 'i-heroicons-exclamation-circle',
+                color: 'red'
+            });
         }
     }
 }
