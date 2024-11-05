@@ -42,7 +42,7 @@ const icon = computed(() => {
 const { currency } = useCurrency(props.transaction.amount);
 
 const isLoading = ref(false)
-const toast = useToast()
+const toast = useAppToast()
 const supabase = useSupabaseClient()
 const deleteTransaction = async () => {
   isLoading.value = true

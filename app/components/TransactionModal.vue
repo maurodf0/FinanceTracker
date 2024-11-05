@@ -115,7 +115,7 @@ const form = ref();
 const isLoading = ref();
 
 const supabase = useSupabaseClient();
-const toast = useToast();
+const toast = useAppToast();
 
 const save = async () => {
     //if errors return

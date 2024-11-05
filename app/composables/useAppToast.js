@@ -1,5 +1,5 @@
 export const useAppToast = () => {
-    const toast = useToast();
+    const toast = useAppToast();
 
     return {
         toastSuccess: ({title, description = null}) => {  

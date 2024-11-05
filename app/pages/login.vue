@@ -31,7 +31,7 @@
   const success = ref(false);
   const email = ref('');
   const pending = ref();
-  const toast = useToast();
+  const toast = useAppToast();
   const supabase = useSupabaseClient();
 
   useRedirectIfAuth();
