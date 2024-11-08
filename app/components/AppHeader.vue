@@ -38,7 +38,7 @@ const items = [
   }], [{
     label: 'Settings',
     icon: 'i-heroicons-cog-8-tooth',
-    click: () => navigateTo('/settings')
+    click: () => navigateTo('/settings/profile')
   }, {
     label: 'Sign out',
     icon: 'i-heroicons-arrow-left-on-rectangle',
