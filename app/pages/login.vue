@@ -5,12 +5,12 @@
         Sign- In to Finance Tracker
       </template>
 
-      <form @submit.prevent="handleLogin">
+      <UForm @submit="handleLogin">
         <UFormGroup label="email" name="email" class="mb-4" :required="true" help="You will recive an email for confirmation link">
           <UInput type="email" placeholder="Email" :required="true" v-model="email" />
         </UFormGroup>
         <UButton :disabled="pending" :loading="pending" type="submit" variant="solid" color="black">Sign In</UButton>
-      </form>
+      </UForm>
 
     </UCard>
 
@@ -43,7 +43,7 @@
       const {error} = await supabase.auth.signInWithOtp({
         email: email.value,
         options: {
-          emailRedirectTo: 'http//localhost:3000/confirm'
+          emailRedirectTo: 'http://localhost:3000/confirm'
         }
       })
 
