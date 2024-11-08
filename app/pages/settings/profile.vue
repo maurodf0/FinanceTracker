@@ -6,7 +6,7 @@
         <UFormGroup class="mb-4" label="Email" name="email" help="You will receive a confirmation on both, old ad new email for the confirmation">
             <UInput v-model="state.email" />
         </UFormGroup>
-        <UButton type="submit" color="black" variant="solid" label="Save" :pending="pendig"/>
+        <UButton type="submit" color="black" variant="solid" label="Save" :pending="pending"/>
     </UForm>
 </template>
 
@@ -24,7 +24,7 @@ const state = ref({
 })
 
 const schema = z.object({
-    name: z.string().min(2).optional,
+    name: z.string().min(2).optional(),
     email: z.string().email()
 })
 
