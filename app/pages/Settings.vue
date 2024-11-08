@@ -6,7 +6,7 @@
             <NuxtPage />
         </div>
     </div>
-    
+    <UNotifications />
 </template>
 
 <script setup>

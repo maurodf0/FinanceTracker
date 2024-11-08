@@ -6,8 +6,9 @@
         <UFormGroup class="mb-4" label="Email" name="email" help="You will receive a confirmation on both, old ad new email for the confirmation">
             <UInput v-model="state.email" />
         </UFormGroup>
-        <UButton type="submit" color="black" variant="solid" label="Save" :pending="pending"/>
+        <UButton type="submit" color="black" variant="solid" label="Save" :loading="pending"/>
     </UForm>
+
 </template>
 
 <script setup>
@@ -15,11 +16,11 @@ import {z} from 'zod';
 const supabase = useSupabaseClient();
 const user = useSupabaseUser();
 
-const { toastSuccess, toastError } = useAppToast;
+const { toastSuccess, toastError } = useAppToast();
 const pending = ref(false);
 
 const state = ref({
-    name: user.value.user_metadata.full_name?.full_name,
+    name: user.value.user_metadata?.full_name,
     email: user.value.email
 })
 
@@ -33,20 +34,20 @@ const saveProfile = async() => {
 
     try {
         
-    const { data, error } = await supabase.auth.updateUser({
+    const { error } = await supabase.auth.updateUser({
         data: {
             full_name: state.value.name
         }
         })
-        if(e) throw e;
+        if(error) throw error;
         toastSuccess({
             title: 'Profile Updated',
             description: 'Your profile is correctly updated'
         })
-    } catch(e) {
+    } catch(error) {
         toastError({
             title: 'Error updating profile',
-            description: e.message
+            description: error.message
         })
     } finally {
         pending.value = false;
