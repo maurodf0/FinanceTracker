@@ -51,7 +51,9 @@
 import { ref, computed } from 'vue';
 import { transactionViewOptions } from '../constants.js';
 
-const viewSelected = ref(transactionViewOptions[1]);
+const user = useSupabaseUser();
+
+const viewSelected = ref(user.value.user_metadata?.transactionView ?? transactionViewOptions[1]);
 
 const {current, previous } = useSelectedTimePeriod(viewSelected);
 console.log(current);
