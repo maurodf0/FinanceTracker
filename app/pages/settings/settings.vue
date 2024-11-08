@@ -17,7 +17,7 @@
   const { toastSuccess, toastError } = useAppToast()
   const pending = ref(false)
   const state = ref({
-    transactionView: user.value.user_metadata?.transaction_view ??  transactionViewOptions[1]// Initialization goes here
+    transactionView: user.value.user_metadata?.transactionView ??  transactionViewOptions[1]// Initialization goes here
   })
   const schema = z.object({
     transactionView: z.enum(transactionViewOptions) // ZOD constraints goes here
@@ -27,7 +27,7 @@
     pending.value = true
     const data =  {
         data: {
-            transaction_view: state.value.transactionView
+            transactionView: state.value.transactionView
         }
     }
     try {
