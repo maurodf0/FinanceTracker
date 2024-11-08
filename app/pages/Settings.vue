@@ -10,9 +10,7 @@
 </template>
 
 <script setup>
-const val = ref(0);
 
-setInterval( () => {val.value++}, 1000)
  const links =[
     {
         label: 'Profile',
