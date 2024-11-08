@@ -33,12 +33,19 @@ const saveProfile = async() => {
     pending.value = true;
 
     try {
-        
-    const { error } = await supabase.auth.updateUser({
+    const data = {
         data: {
             full_name: state.value.name
         }
-        })
+    }
+
+    if(state.value.email != user.value.email) {
+        data.email = state.value.email
+    }
+
+    console.log(data);
+
+    const { error } = await supabase.auth.updateUser(data);
         if(error) throw error;
         toastSuccess({
             title: 'Profile Updated',
