@@ -6,7 +6,7 @@
         <UFormGroup class="mb-4" label="Email" name="email" help="You will receive a confirmation on both, old ad new email for the confirmation">
             <UInput v-model="state.email" />
         </UFormGroup>
-        <UButton type="submit" color="black" variant="solid" label="Save" :loading="pending"/>
+        <UButton type="submit" color="black" variant="solid" label="Save" :loading="pending" :disabled="pending"/>
     </UForm>
 
 </template>
