@@ -2,7 +2,7 @@
             <UModal v-model="isOpen">
                 <UCard>
                     <template #header>
-                    Add Transiction
+                    {{ isEditing ? 'Edit' : 'Add'}} Transiction
                     </template>
 
                   <UForm 
@@ -15,7 +15,8 @@
                             :required="true"
                             name="type" 
                             class="mb-4">
-                            <USelect 
+                            <USelect
+                                :disabled="isEditing" 
                                 v-model="state.type"
                                 placeholder="Add Transaction Type"
                                 :options="types" ></USelect>
@@ -75,8 +76,15 @@ import { z } from 'zod'
 
 
    const props = defineProps({
-        modelValue: Boolean
+        modelValue: Boolean,
+        transaction : {
+            type: Object,
+            required: false
+        }
     })
+    const isEditing = () => {
+        return !!props.transaction
+    }
    const emit = defineEmits(['update:modelValue', 'saved'])
 
    const isOpen = computed({
@@ -161,9 +169,16 @@ const initialState = {
         category: undefined
    }
 
-   const state = ref({
+   const state = ref(isEditing.value ? {
+        type: props.transaction.type,
+        amount: props.transaction.amout,
+        created_at: props.transaction.created_at,
+        description: props.transaction.description,
+        category: props.transaction.category
+   }  : 
+   { 
     ...initialState
-   })
+    })
 
    const resetForm = () => {
     return Object.assign(state.value, initialState);
