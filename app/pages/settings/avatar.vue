@@ -27,7 +27,8 @@
   
   const uploading = ref(false)
   const fileInput = ref() // Reference to an input with ref="fileInput" attribute
-  
+  console.log(user.value.user_metadata?.avatar_url);
+
   const saveAvatar = async () => {
 
     const file = fileInput.value.input.files[0]
@@ -40,6 +41,7 @@
     }
 
     console.log(file);
+
 
     const fileExt = file.name.split('.').pop();
     const fileName = `${Math.random()}.${fileExt}`;
