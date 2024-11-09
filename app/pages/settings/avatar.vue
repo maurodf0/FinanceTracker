@@ -29,9 +29,7 @@
   const fileInput = ref() // Reference to an input with ref="fileInput" attribute
   
   const saveAvatar = async () => {
-    // 1. Get the uploaded file
-    //    a) If no file uploaded, show toast error
-    // 2. Generate the new filename
+
     const file = fileInput.value.input.files[0]
 
     if(!file){
@@ -48,6 +46,8 @@
   
     try {
       uploading.value = true
+
+      const currentAvatarUrl = user.value.user_metadata?.avatar_url;
       // 1. Grab the current avatar URL
       // 2. Upload the image to avatars bucket
       // 3. Update the user metadata with the avatar URL
