@@ -133,7 +133,10 @@ const save = async () => {
     isLoading.value = true;
 
     try {
-        const { error } = await supabase.from('transactions').upsert({...state.value})
+        const { error } = await supabase.from('transactions').upsert({
+            ...state.value,
+            id: props.transaction?.id
+        })
         if( !error ) {
             toastSuccess({
             title: 'Transaction saved',
