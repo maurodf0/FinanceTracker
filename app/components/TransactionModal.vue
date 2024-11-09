@@ -82,9 +82,9 @@ import { z } from 'zod'
             required: false
         }
     })
-    const isEditing = () => {
-        return !!props.transaction
-    }
+    const isEditing = computed(() => !!props.transaction)
+
+    
    const emit = defineEmits(['update:modelValue', 'saved'])
 
    const isOpen = computed({
@@ -164,7 +164,13 @@ const schema = z.intersection(
     defaultSchema
 )
 
-const initialState = {
+const initialState = isEditing.value ? {
+        type: props.transaction.type,
+        amount: props.transaction.amout,
+        created_at: props.transaction.created_at.split('T')[0],
+        description: props.transaction.description,
+        category: props.transaction.category
+   } : {
         type: undefined,
         amount: 0,
         created_at: undefined,
@@ -172,14 +178,7 @@ const initialState = {
         category: undefined
    }
 
-   const state = ref(isEditing.value ? {
-        type: props.transaction.type,
-        amount: props.transaction.amout,
-        created_at: props.transaction.created_at,
-        description: props.transaction.description,
-        category: props.transaction.category
-   }  : 
-   { 
+   const state = ref({ 
     ...initialState
     })
 
