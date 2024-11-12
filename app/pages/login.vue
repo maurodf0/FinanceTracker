@@ -73,6 +73,8 @@
   const {toastError, toastSuccess} = useAppToast();
   const supabase = useSupabaseClient();
   const show = ref(false);
+
+  const redirectUrl = useRuntimeConfig()
   
 
   const signInWithOAuth = async () => {
