@@ -39,7 +39,7 @@
       </div>
     </UCard>
     
-    <UCard>
+    <UCard class="mt-8">
       <template #header>
         Not have an account? Sign-Up
       </template>
@@ -68,6 +68,7 @@
   const password = ref('');
   const {toastError, toastSuccess} = useAppToast();
   const supabase = useSupabaseClient();
+  
 
   const signInWithOAuth = async () => {
   const { error } = await supabase.auth.signInWithOAuth({
@@ -109,7 +110,7 @@
 
   const handleRegister = async () => {
 
-   pending.value = true;
+   pendingRegister.value = true;
       try {
     const { error } = await supabase.auth.signUp({
       email: emailRegister.value,
@@ -124,12 +125,15 @@
           description: error.message,
         })
       }  else {
-  
+      toastSuccess({
+        title: 'Registration completed',
+        description: 'Check your email for email confirmation',
+      });
           success.value = true;
         }
       
       } finally {
-  pending.value = false;
+        pendingRegister.value = false;
 }
   }
 </script>
