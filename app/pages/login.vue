@@ -74,7 +74,7 @@
   const supabase = useSupabaseClient();
   const show = ref(false);
 
-  const redirectUrl = useRuntimeConfig()
+  const redirectUrl = useRuntimeConfig().public.url;
   
 
   const signInWithOAuth = async () => {
