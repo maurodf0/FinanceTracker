@@ -38,6 +38,21 @@
         <p><strong>Important:</strong> The link will expire in 10 minutes</p>
       </div>
     </UCard>
+    
+    <UCard>
+      <template #header>
+        Not have an account? Sign-Up
+      </template>
+      <UForm @submit="handleRegister">
+        <UFormGroup label="email" name="email" class="mb-4" :required="true" help="You will recive an email for confirmation link">
+          <UInput type="email" placeholder="Email" :required="true" v-model="emailregister" />
+        </UFormGroup>
+        <UFormGroup label="Password" name="Password" class="mb-4" :required="true" >
+          <UInput type="password" placeholder="Password" :required="true" v-model="password" />
+        </UFormGroup>
+        <UButton :disabled="pendingRegister" :loading="pendingRegister" type="submit" variant="solid" color="black">Sign In</UButton>
+      </UForm>
+    </UCard>
 
    
   </div>
@@ -48,6 +63,9 @@
   const success = ref(false);
   const email = ref('');
   const pending = ref();
+  const pendingRegister = ref();
+  const emailRegister = ref('');
+  const password = ref('');
   const {toastError, toastSuccess} = useAppToast();
   const supabase = useSupabaseClient();
 
@@ -87,6 +105,32 @@
       pending.value = false;
 
     }
+  }
+
+  const handleRegister = async () => {
+
+   pending.value = true;
+      try {
+    const { error } = await supabase.auth.signUp({
+      email: emailRegister.value,
+      password: password.value,
+
+})
+      
+ 
+  if(error){
+        toastError({
+          title: 'Error Authentication',
+          description: error.message,
+        })
+      }  else {
+  
+          success.value = true;
+        }
+      
+      } finally {
+  pending.value = false;
+}
   }
 </script>
 
