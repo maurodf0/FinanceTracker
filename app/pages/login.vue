@@ -15,7 +15,7 @@
 
     <UCard v-if="!success">
       <template #header>
-        Sign-In to Finance Tracker, don't have an account? <NuxtLink to="/register">Register</NuxtLink>
+        Sign-In to Finance Tracker
       </template>
 
       <UForm @submit="handleLogin">
