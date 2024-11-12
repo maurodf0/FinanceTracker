@@ -81,7 +81,7 @@
   const { error } = await supabase.auth.signInWithOAuth({
     provider: 'github',
     options: {
-      redirectTo: 'http://localhost:3000/confirm',
+      redirectTo: `${redirectUrl}/confirm`,
     },
   })
   if (error) console.log(error)
