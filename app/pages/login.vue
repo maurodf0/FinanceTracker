@@ -13,9 +13,9 @@
       />
     </LoginCard>
 
-    <UCard v-if="!success">
+    <UCard v-if="!show">
       <template #header>
-        Sign-In to Finance Tracker
+        Sign-In to Finance Tracker? <p class="text-sm">Not have an account? <a @click="show=!show">Register</a></p>
       </template>
 
       <UForm @submit="handleLogin">
@@ -26,6 +26,23 @@
       </UForm>
 
     </UCard>
+
+
+    <UCard v-else>
+      <template #header>
+        Not have an account? Sign-Up. <p class="text-sm">Already have an account? <a @click="show=!show">Login</a></p>
+      </template>
+      <UForm @submit="handleRegister">
+        <UFormGroup label="Email" name="email" class="mb-4" :required="true">
+          <UInput type="email" placeholder="Email" :required="true" v-model="emailRegister" />
+        </UFormGroup>
+        <UFormGroup label="Password" name="Password" class="mb-4" :required="true" >
+          <UInput type="password" placeholder="Password" :required="true" v-model="password" />
+        </UFormGroup>
+        <UButton :disabled="pendingRegister" :loading="pendingRegister" type="submit" variant="solid" color="black">Sign In</UButton>
+      </UForm>
+    </UCard>
+
   </div>
 
 
@@ -39,20 +56,7 @@
       </div>
     </UCard>
     
-    <UCard class="mt-8">
-      <template #header>
-        Not have an account? Sign-Up
-      </template>
-      <UForm @submit="handleRegister">
-        <UFormGroup label="email" name="email" class="mb-4" :required="true" help="You will recive an email for confirmation link">
-          <UInput type="email" placeholder="Email" :required="true" v-model="emailregister" />
-        </UFormGroup>
-        <UFormGroup label="Password" name="Password" class="mb-4" :required="true" >
-          <UInput type="password" placeholder="Password" :required="true" v-model="password" />
-        </UFormGroup>
-        <UButton :disabled="pendingRegister" :loading="pendingRegister" type="submit" variant="solid" color="black">Sign In</UButton>
-      </UForm>
-    </UCard>
+
 
    
   </div>
@@ -63,11 +67,12 @@
   const success = ref(false);
   const email = ref('');
   const pending = ref();
-  const pendingRegister = ref();
+  const pendingRegister = ref(false);
   const emailRegister = ref('');
   const password = ref('');
   const {toastError, toastSuccess} = useAppToast();
   const supabase = useSupabaseClient();
+  const show = ref(false);
   
 
   const signInWithOAuth = async () => {
@@ -115,6 +120,9 @@
     const { error } = await supabase.auth.signUp({
       email: emailRegister.value,
       password: password.value,
+      options: {
+      emailRedirectTo: 'http://localhost:3000/confirm',
+    },
 
 })
       
@@ -138,6 +146,10 @@
   }
 </script>
 
-<style>
-
+<style scoped>
+  a {
+    text-decoration: underline;
+    font-weight: 600;
+    cursor: pointer;
+  }
 </style>
