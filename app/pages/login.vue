@@ -1,8 +1,21 @@
 <template>
   <div>
+    <div v-if="!success" class="flex flex-col gap-3">
+      <LoginCard>
+      <UButton
+        class="mt-3"
+        icon="i-mdi-github"
+        block
+        label="Github"
+        color="gray"
+        variant="solid"
+        @click="signInWithOAuth"
+      />
+    </LoginCard>
+
     <UCard v-if="!success">
       <template #header>
-        Sign- In to Finance Tracker
+        Sign-In to Finance Tracker, don't have an account? <NuxtLink to="/register">Register</NuxtLink>
       </template>
 
       <UForm @submit="handleLogin">
@@ -13,6 +26,7 @@
       </UForm>
 
     </UCard>
+  </div>
 
 
     <UCard v-else>
@@ -25,12 +39,7 @@
       </div>
     </UCard>
 
-    <UCard>
-      <template #header>
-        Sign in with Github
-      </template>
-      <UButton @click="signInWithOAuth" color="black" variant="solid">Github</UButton>
-    </UCard>
+   
   </div>
   <UNotifications />
 </template>
