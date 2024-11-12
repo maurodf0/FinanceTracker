@@ -14,6 +14,7 @@
 
     </UCard>
 
+
     <UCard v-else>
       <template #header>
         Email has been sent
@@ -22,6 +23,13 @@
         <p>We have sent an email to <strong>{{email.value}}</strong> with a link for sign in</p>
         <p><strong>Important:</strong> The link will expire in 10 minutes</p>
       </div>
+    </UCard>
+
+    <UCard>
+      <template #header>
+        Sign in with Github
+      </template>
+      <UButton @click="signInWithOAuth" color="black" variant="solid">Github</UButton>
     </UCard>
   </div>
   <UNotifications />
@@ -33,7 +41,16 @@
   const pending = ref();
   const {toastError, toastSuccess} = useAppToast();
   const supabase = useSupabaseClient();
-  const redirectUrl = useRuntimeConfig().public.base_url
+
+  const signInWithOAuth = async () => {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'github',
+    options: {
+      redirectTo: 'http://localhost:3000/confirm',
+    },
+  })
+  if (error) console.log(error)
+}
 
   useRedirectIfAuth();
 
@@ -44,7 +61,7 @@
       const {error} = await supabase.auth.signInWithOtp({
         email: email.value,
         options: {
-          emailRedirectTo: `${redirectUrl}/confirm`
+          emailRedirectTo: 'http://localhost:3000/confirm'
         }
       })
 
