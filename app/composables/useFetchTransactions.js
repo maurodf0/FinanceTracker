@@ -11,6 +11,18 @@ const income = computed(() => {
     });
 });
 
+const savings = computed(() => {
+    return transactions.value.filter(t => {
+        return t.type === 'Savings';
+    });
+});
+
+const invesment = computed(() => {
+    return transactions.value.filter(t => {
+        return t.type === 'Investment';
+    });
+});
+
 const expense = computed(() => {
     return transactions.value.filter(t => {
         return t.type === 'Expense';
@@ -25,6 +37,13 @@ const expenseCount = computed(() => {
     return expense.value.length;
 });
 
+const savingsCount = computed(() => {
+    return savings.value.length;
+});
+const invesmentCount = computed(() => {
+    return invesment.value.length;
+});
+
 // Computed properties per calcolare il totale delle transazioni
 const incomeTotal = computed(() => {
     return income.value.reduce((sum, transaction) => {
@@ -33,6 +52,16 @@ const incomeTotal = computed(() => {
 });
 const expenseTotal = computed(() => {
     return expense.value.reduce((sum, transaction) => {
+        return sum + transaction.amount;
+    }, 0);
+});
+const savingsTotal = computed(() => {
+    return savings.value.reduce((sum, transaction) => {
+        return sum + transaction.amount;
+    }, 0);
+});
+const invesmentTotal = computed(() => {
+    return invesment.value.reduce((sum, transaction) => {
         return sum + transaction.amount;
     }, 0);
 });
@@ -112,7 +141,11 @@ return {
         incomeTotal,
         expenseTotal,
         incomeCount,
-        expenseCount
+        expenseCount,
+        savingsTotal,
+        invesmentTotal,
+        savingsCount,
+        invesmentCount
     },
     refresh,
     pending

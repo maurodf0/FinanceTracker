@@ -64,6 +64,10 @@ const { pending, refresh, transactions: {
     expenseCount,
     incomeTotal,
     expenseTotal,
+    savingsCount,
+    savingsTotal,
+    invesmentTotal,
+    invesmentCount
     grouped: {
         byDate
     }
