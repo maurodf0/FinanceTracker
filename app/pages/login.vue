@@ -96,7 +96,7 @@
       const {error} = await supabase.auth.signInWithOtp({
         email: email.value,
         options: {
-          emailRedirectTo: 'http://localhost:3000/confirm'
+          emailRedirectTo: '${redirectUrl}/confirm'
         }
       })
 
